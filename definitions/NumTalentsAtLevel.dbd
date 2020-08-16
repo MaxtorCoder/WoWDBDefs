@@ -1,6 +1,6 @@
 COLUMNS
 int Level?
-float NumberOfTalents?
+float NumberOfTalents? // NumTalents but type is different
 
 BUILD 4.0.0.12911-4.3.4.15595
 Level<32>

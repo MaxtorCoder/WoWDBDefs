@@ -6,7 +6,7 @@ int RaceMask
 int ClassMask
 int OrderIndex
 string BackgroundFile
-string Description?
+locstring Description_lang?
 int RoleMask? // &2: tank, &4: healer, &8: dps
 int<Spell::ID> MasterySpellID?
 int CategoryEnumID?
@@ -19,7 +19,7 @@ RaceMask<32>
 CategoryEnumID<32>
 OrderIndex<32>
 BackgroundFile
-Description
+Description_lang
 RoleMask<32>
 MasterySpellID<32>[2]
 
