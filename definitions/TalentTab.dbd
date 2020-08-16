@@ -15,7 +15,7 @@ BUILD 4.0.0.12911-4.3.4.15595
 $id$ID<32>
 Name_lang
 SpellIconID<32>
-RaceMask<32>
+ClassMask<32>
 CategoryEnumID<32>
 OrderIndex<32>
 BackgroundFile
@@ -27,7 +27,7 @@ BUILD 4.0.0.11927-4.0.0.12319
 $id$ID<32>
 Name_lang
 SpellIconID<32>
-RaceMask<32>
+ClassMask<32>
 CategoryEnumID<32>
 OrderIndex<32>
 BackgroundFile
