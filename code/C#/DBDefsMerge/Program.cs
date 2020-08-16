@@ -17,12 +17,17 @@ namespace DBDefsMerge
                 Environment.Exit(1);
             }
 
+            var numLayoutsAdded = 0;
+            
             var firstDir = args[0];
             var secondDir = args[1];
             var targetDir = args[2];
 
             var firstDirFiles = new DirectoryInfo(firstDir).GetFiles().Select(o => o.Name).ToList();
             var secondDirFiles = new DirectoryInfo(secondDir).GetFiles().Select(o => o.Name).ToList();
+
+            var firstDirFilesLC = new DirectoryInfo(firstDir).GetFiles().Select(o => o.Name.ToLower()).ToList();
+            var secondDirFilesLC = new DirectoryInfo(secondDir).GetFiles().Select(o => o.Name.ToLower()).ToList();
 
             var newDefinitions = new Dictionary<string, DBDefinition>();
 
@@ -31,10 +36,11 @@ namespace DBDefsMerge
             foreach (var file in secondDirFiles)
             {
                 var dbName = Path.GetFileNameWithoutExtension(file);
-                if (firstDirFiles.Contains(file))
+                if (firstDirFilesLC.Contains(file.ToLower()))
                 {
                     // Both directories have this file. Merge!
-                    var firstFile = reader.Read(Path.Combine(firstDir, file));
+                    var firstFileName = Path.Combine(firstDir, firstDirFiles.ElementAt(firstDirFilesLC.IndexOf(file.ToLower())));
+                    var firstFile = reader.Read(firstFileName);
                     var secondFile = reader.Read(Path.Combine(secondDir, file));
 
                     var newDefinition = firstFile;
@@ -171,8 +177,6 @@ namespace DBDefsMerge
                         if (!foundCol)
                         {
                             // Column was not found, add it
-                            Console.WriteLine(dbName + "::" + columnDefinition2.Key + " was not found found in first file!");
-
                             newDefinition.columnDefinitions.Add(columnDefinition2.Key, columnDefinition2.Value);
                         }
                     }
@@ -279,6 +283,7 @@ namespace DBDefsMerge
                             {
                                 // Version was not found/merged, add it!
                                 newVersions.Add(versionDefinition2);
+                                numLayoutsAdded++;
                             }
 
                             newDefinition.versionDefinitions = newVersions.ToArray();
@@ -337,7 +342,7 @@ namespace DBDefsMerge
                         }
                     }
 
-                    newDefinitions.Add(dbName, newDefinition);
+                    newDefinitions.Add(Path.GetFileNameWithoutExtension(firstFileName), newDefinition);
                 }
                 else
                 {
@@ -348,7 +353,7 @@ namespace DBDefsMerge
 
             foreach(var file in firstDirFiles)
             {
-                if (!secondDirFiles.Contains(file))
+                if (!secondDirFilesLC.Contains(file.ToLower()))
                 {
                     // Only 1st dir has this file, use that
                     newDefinitions.Add(Path.GetFileNameWithoutExtension(file), reader.Read(Path.Combine(firstDir, file)));
@@ -410,9 +415,31 @@ namespace DBDefsMerge
                     }
                 }
 
+                // Run through column definitions to see if there's any unused columns 
+                var columnDefinitionsCopy = definitionCopy.columnDefinitions.ToList();
+                foreach (var columnDefinition in columnDefinitionsCopy)
+                {
+                    var columnUsed = false;
+                    foreach(var versionDefinition in definitionCopy.versionDefinitions)
+                    {
+                        foreach(var definition in versionDefinition.definitions)
+                        {
+                            if(definition.name == columnDefinition.Key)
+                            {
+                                columnUsed = true;
+                            }
+                        }
+                    }
+
+                    if (!columnUsed)
+                    {
+                        definitionCopy.columnDefinitions.Remove(columnDefinition.Key);
+                    }
+                }
+
                 writer.Save(definitionCopy, Path.Combine(targetDir, entry.Key + ".dbd"));
             }
-
+            Console.WriteLine("Done, " + numLayoutsAdded + " new layouts added!");
             //Console.ReadLine();
         }
     }

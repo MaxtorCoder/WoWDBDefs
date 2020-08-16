@@ -14,7 +14,7 @@ namespace DBDefsDumper
         {
             if (args.Length < 2)
             {
-                throw new ArgumentException("Not enough arguments! Required: file, outdir");
+                throw new ArgumentException("Not enough arguments! Required: file, outdir, (build in x.x.x format), (pattern name to always use)");
             }
 
             if (!File.Exists(args[0]))
@@ -37,33 +37,45 @@ namespace DBDefsDumper
                 var buildPatternLength = buildPattern.Length;
 
                 var build = "";
+                var patternOverride = "";
 
-                while (true)
+                if (args.Length >= 3)
                 {
-                    if ((bin.BaseStream.Length - bin.BaseStream.Position) < chunkSize)
+                    build = args[2];
+                    if(args.Length >= 4)
                     {
-                        break;
-                    }
-
-                    var posInStack = Search(bin.ReadBytes(chunkSize), buildPattern);
-
-                    if (posInStack != chunkSize)
-                    {
-                        var matchPos = bin.BaseStream.Position - chunkSize + posInStack;
-
-                        bin.BaseStream.Position = matchPos;
-                        bin.ReadBytes(6);
-                        var buildNumber = new string(bin.ReadChars(5));
-                        bin.ReadBytes(2);
-                        var patch = new string(bin.ReadChars(5));
-                        build = patch + "." + buildNumber;
-                    }
-                    else
-                    {
-                        bin.BaseStream.Position = bin.BaseStream.Position - buildPatternLength;
+                        patternOverride = args[3];
                     }
                 }
 
+                if (build == "")
+                {
+                    while (true)
+                    {
+                        if ((bin.BaseStream.Length - bin.BaseStream.Position) < chunkSize)
+                        {
+                            break;
+                        }
+
+                        var posInStack = Search(bin.ReadBytes(chunkSize), buildPattern);
+
+                        if (posInStack != chunkSize)
+                        {
+                            var matchPos = bin.BaseStream.Position - chunkSize + posInStack;
+
+                            bin.BaseStream.Position = matchPos;
+                            bin.ReadBytes(6);
+                            var buildNumber = new string(bin.ReadChars(5));
+                            bin.ReadBytes(2);
+                            var patch = new string(bin.ReadChars(5));
+                            build = patch + "." + buildNumber;
+                        }
+                        else
+                        {
+                            bin.BaseStream.Position = bin.BaseStream.Position - buildPatternLength;
+                        }
+                    }
+                }
 
                 if (build == "")
                 {
@@ -121,8 +133,15 @@ namespace DBDefsDumper
                             bin.BaseStream.Position = matchPos;
                             bin.ReadBytes(14);
                             build = new string(bin.ReadChars(5));
-                            Console.WriteLine("Expansion, major and minor version not found in binary. Please enter it in this format X.X.X: ");
-                            build = Console.ReadLine() + "." + build;
+                            if(args.Length == 3)
+                            {
+                                build = args[2];
+                            }
+                            else
+                            {
+                                Console.WriteLine("Expansion, major and minor version not found in binary. Please enter it in this format X.X.X: ");
+                                build = Console.ReadLine() + "." + build;
+                            }
                         }
                         else
                         {
@@ -137,6 +156,11 @@ namespace DBDefsDumper
                     build = Console.ReadLine();
                 }
 
+                if (build == "8.0.1.26321")
+                {
+                    Console.WriteLine("Build 8.0.1.26321 has incorrect DBMeta, skipping..");
+                    return;
+                }
                 // Reset position for DBMeta reading
                 bin.BaseStream.Position = 0;
 
@@ -147,10 +171,66 @@ namespace DBDefsDumper
 
                 foreach(var pattern in patternBuilder.patterns)
                 {
-                    // Skip versions of the pattern that aren't for this expansion
-                    if(build[0] != pattern.name[0])
+                    if(patternOverride == "")
                     {
-                        continue;
+                        // Skip versions of the pattern that aren't for this expansion
+                        if (build.StartsWith("1"))
+                        {
+                            if (!pattern.compatiblePatches.Contains(build.Substring(0, 6)))
+                            {
+                                Console.WriteLine("Skipping " + pattern.name + " as it does not list " + build + " as compatible!");
+                                continue;
+                            }
+
+                            if (!pattern.compatiblePatches.Contains(build.Substring(0, 6)))
+                            {
+                                Console.WriteLine("Skipping " + pattern.name + " as it does not list " + build + " as compatible!");
+                                continue;
+                            }
+
+                            if (pattern.minBuild != 0 && pattern.minBuild > int.Parse(build.Substring(7)))
+                            {
+                                Console.WriteLine("Skipping " + pattern.name + " as minimum build " + pattern.minBuild + " exceeds build of " + build.Substring(6));
+                                continue;
+                            }
+
+                            if (pattern.maxBuild != 0 && int.Parse(build.Substring(7)) > pattern.maxBuild)
+                            {
+                                Console.WriteLine("Skipping " + pattern.name + " as maximum build " + pattern.maxBuild + " exceeds build of " + build.Substring(6));
+                                continue;
+                            }
+                        }
+                        else
+                        {
+                            if (!pattern.compatiblePatches.Contains(build.Substring(0, 5)))
+                            {
+                                Console.WriteLine("Skipping " + pattern.name + " as it does not list " + build + " as compatible!");
+                                continue;
+                            }
+
+                            if (!pattern.compatiblePatches.Contains(build.Substring(0, 5)))
+                            {
+                                Console.WriteLine("Skipping " + pattern.name + " as it does not list " + build + " as compatible!");
+                                continue;
+                            }
+
+                            if (pattern.minBuild != 0 && pattern.minBuild > int.Parse(build.Substring(6)))
+                            {
+                                Console.WriteLine("Skipping " + pattern.name + " as minimum build " + pattern.minBuild + " exceeds build of " + build.Substring(6));
+                                continue;
+                            }
+
+                            if (pattern.maxBuild != 0 && int.Parse(build.Substring(6)) > pattern.maxBuild)
+                            {
+                                Console.WriteLine("Skipping " + pattern.name + " as maximum build " + pattern.maxBuild + " exceeds build of " + build.Substring(6));
+                                continue;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (patternOverride != pattern.name)
+                            continue;
                     }
 
                     var patternBytes = ParsePattern(pattern.cur_pattern).ToArray();
@@ -174,9 +254,10 @@ namespace DBDefsDumper
                             if (pattern.offsets.ContainsKey(Name.FDID))
                             {
                                 bin.BaseStream.Position = matchPos + pattern.offsets[Name.FDID];
-                                if(bin.ReadUInt32() < 53183)
+                                var fdid = bin.ReadUInt32();
+                                if (fdid < 53183)
                                 {
-                                    Console.WriteLine("Invalid filedataid, skipping match..");
+                                    Console.WriteLine("Invalid filedataid " + fdid + ", skipping match..");
                                     continue;
                                 }
                             }
@@ -253,8 +334,12 @@ namespace DBDefsDumper
                             if (pattern.offsets.ContainsKey(Name.DB_CACHE_FILENAME))
                             {
                                 bin.BaseStream.Position = matchPos + pattern.offsets[Name.DB_CACHE_FILENAME];
-                                var name = bin.ReadCString();
-                                if (!name.EndsWith("adb"))
+                                bin.BaseStream.Position = (long)translate((ulong)bin.ReadInt64());
+                                var adbname = bin.ReadCString();
+
+                                bin.BaseStream.Position = matchPos + pattern.offsets[Name.DB_CACHE_FILENAME];
+
+                                if (!adbname.EndsWith("adb"))
                                 {
                                     Console.WriteLine("ADB filename does not end in adb, skipping match..");
                                     continue;
@@ -267,7 +352,13 @@ namespace DBDefsDumper
                             if (pattern.offsets.ContainsKey(Name.DB_NAME))
                             {
                                 bin.BaseStream.Position = (long)translate((ulong)meta.nameOffset);
-                                metas.TryAdd(bin.ReadCString(), meta);
+                                var filename = bin.ReadCString();
+                                if(filename.Contains("DBFilesClient"))
+                                {
+                                    filename = filename.Substring(filename.IndexOf("\\") + 1);
+                                }
+
+                                metas.TryAdd(Path.GetFileNameWithoutExtension(filename), meta);
                             }else if (pattern.offsets.ContainsKey(Name.DB_FILENAME))
                             {
                                 bin.BaseStream.Position = (long)translate((ulong)meta.dbFilenameOffs);
@@ -298,7 +389,7 @@ namespace DBDefsDumper
                 {
                     if((long)translate((ulong)meta.Value.field_offsets_offs) > bin.BaseStream.Length)
                     {
-                        Console.WriteLine("Skipping reading of " + meta.Key + " because first offset is way out of range!");
+                        Console.WriteLine("Skipping reading of " + meta.Key + " because field offset (" + (long)translate((ulong)meta.Value.field_offsets_offs)  + ") is outside of file range (" + bin.BaseStream.Length + ")!");
                         continue;
                     }
 
@@ -318,15 +409,27 @@ namespace DBDefsDumper
                         fieldCount = meta.Value.num_fields;
                     }
 
-                    var field_offsets = ReadFieldArray(bin, fieldCount, (long)translate((ulong)meta.Value.field_offsets_offs));
+                    var field_offsets = ReadFieldArray(bin, fieldCount, (long)translate((ulong)meta.Value.field_offsets_offs)); // TODO: Field offsets is currently unused, use to verify sizes
                     var field_sizes = ReadFieldArray(bin, fieldCount, (long)translate((ulong)meta.Value.field_sizes_offs));
                     var field_types = ReadFieldArray(bin, fieldCount, (long)translate((ulong)meta.Value.field_types_offs));
-                    var field_flags = ReadFieldArray(bin, fieldCount, (long)translate((ulong)meta.Value.field_flags_offs));
+
+                    var field_flags = new List<int>();
+                    if ((build.StartsWith("7.3.0.") || build.StartsWith("7.3.2.")) && (long)translate((ulong)meta.Value.field_flags_offs) > bin.BaseStream.Length)
+                    {
+                        for(var fc = 0; fc < fieldCount; fc++)
+                        {
+                            field_flags.Add(0);
+                        }
+                    }
+                    else
+                    {
+                        field_flags = ReadFieldArray(bin, fieldCount, (long)translate((ulong)meta.Value.field_flags_offs));
+                    }
                     var field_sizes_in_file = ReadFieldArray(bin, fieldCount, (long)translate((ulong)meta.Value.field_sizes_in_file_offs));
                     var field_types_in_file = ReadFieldArray(bin, fieldCount, (long)translate((ulong)meta.Value.field_types_in_file_offs));
                     var field_flags_in_file = ReadFieldArray(bin, fieldCount, (long)translate((ulong)meta.Value.field_flags_in_file_offs));
                     var field_names_in_file = ReadFieldOffsetArray(bin, fieldCount, (long)translate((ulong)meta.Value.namesInFileOffs));
-
+                
                     if (meta.Value.id_column == -1)
                     {
                         writer.WriteLine("int ID");
@@ -349,7 +452,14 @@ namespace DBDefsDumper
 
                     if (meta.Value.num_fields != 0 && (meta.Value.num_fields_in_file != meta.Value.num_fields))
                     {
-                        columnTypeFlags.Add(new Tuple<int, int>(field_types[meta.Value.num_fields_in_file], field_flags[meta.Value.num_fields_in_file]));
+                        if(meta.Value.num_fields_in_file > field_flags.Count())
+                        {
+                            columnTypeFlags.Add(new Tuple<int, int>(field_types[meta.Value.num_fields_in_file], 0));
+                        }
+                        else
+                        {
+                            columnTypeFlags.Add(new Tuple<int, int>(field_types[meta.Value.num_fields_in_file], field_flags[meta.Value.num_fields_in_file]));
+                        }
                     }
 
                     for(var i = 0; i < columnTypeFlags.Count; i++)
@@ -361,23 +471,44 @@ namespace DBDefsDumper
                         }
                         else
                         {
-                            columnNames.Add(GenerateName(i, meta.Value.layout_hash, build));
+                            columnNames.Add(GenerateName(i, build));
                         }
 
                         var t = TypeToT(columnTypeFlags[i].Item1, (FieldFlags)columnTypeFlags[i].Item2);
-                        if(t.Item1 == "locstring")
+                        if (field_names_in_file.Count > 0)
                         {
-                            writer.WriteLine(t.Item1 + " " + columnNames[i]+ "_lang");
-                        }
-                        else
-                        {
-                            if(t.Item1 == "uint")
+                            if (t.Item1 == "locstring")
                             {
-                                writer.WriteLine("int " + columnNames[i]);
+                                writer.WriteLine(t.Item1 + " " + columnNames[i] + "_lang");
                             }
                             else
                             {
-                                writer.WriteLine(t.Item1 + " " + columnNames[i]);
+                                if (t.Item1 == "uint")
+                                {
+                                    writer.WriteLine("int " + columnNames[i]);
+                                }
+                                else
+                                {
+                                    writer.WriteLine(t.Item1 + " " + columnNames[i]);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (t.Item1 == "locstring")
+                            {
+                                writer.WriteLine(t.Item1 + " " + columnNames[i] + "_lang?");
+                            }
+                            else
+                            {
+                                if (t.Item1 == "uint")
+                                {
+                                    writer.WriteLine("int " + columnNames[i] + "?");
+                                }
+                                else
+                                {
+                                    writer.WriteLine(t.Item1 + " " + columnNames[i] + "?");
+                                }
                             }
                         }
                     }
@@ -419,7 +550,7 @@ namespace DBDefsDumper
                             writer.Write("$id$");
                         }
 
-                        if(build.StartsWith("7.3.5") || build.StartsWith("8.0.1"))
+                        if(build.StartsWith("7.3.5") || build.StartsWith("8"))
                         {
                             if (meta.Value.column_8C == i)
                             {
@@ -484,7 +615,7 @@ namespace DBDefsDumper
                     if (meta.Value.num_fields != 0 && (meta.Value.num_fields_in_file != meta.Value.num_fields))
                     {
                         var i = meta.Value.num_fields_in_file;
-                        var typeFlags = TypeToT(field_types[i], (FieldFlags)field_flags[i]);
+                        var typeFlags = TypeToT(columnTypeFlags[i].Item1, (FieldFlags)columnTypeFlags[i].Item2);
 
                         writer.Write("$noninline,relation$" + columnNames[i]);
 
@@ -553,24 +684,15 @@ namespace DBDefsDumper
             return returnList;
         }
 
-        private static string GenerateName(int fieldIndex, int layoutHash, string build)
+        private static string GenerateName(int fieldIndex, string build)
         {
-            // TODO: This function should generate a name that is the same between dumps of the same build.
-            // We can base this off layoutHash in builds that have it, but need to figure something out for builds that don't.
-            // For now, just name them randomly.
-
-            if (layoutHash < 0)
-            {
-                layoutHash = layoutHash * -1;
-            }
-
-            //return "Field_" + (layoutHash + fieldIndex).ToString().PadLeft(9, '0');
-            return "Field_" + new Random().Next(1, int.MaxValue).ToString().PadLeft(9, '0');
+            // This function should generate a name that is the same between dumps of the same build
+            return "Field_" + build.Replace(".", "_") + "_" + fieldIndex.ToString().PadLeft(3, '0');
         }
 
         private static string CleanRealName(string name)
         {
-            if (name.Substring(0, 2) == "m_")
+            if (name.Length > 2 && name.Substring(0, 2) == "m_")
             {
                 return name.Remove(0, 2);
             }
@@ -689,8 +811,14 @@ namespace DBDefsDumper
                     case Name.SIBLING_TABLE_HASH:
                         meta.siblingTableHash = bin.ReadInt32();
                         break;
+                    case Name.FIELD_NAMES:
+                        bin.ReadInt64();
+                        break;
                     case Name.FIELD_NAMES_IN_FILE:
                         meta.namesInFileOffs = bin.ReadInt64();
+                        break;
+                    case Name.DB_NAME_DUPLICATE:
+                        bin.ReadInt64();
                         break;
                     case Name.UNK_BOOL_601_x24:
                     case Name.UNK_BOOL_601dbc_x38:

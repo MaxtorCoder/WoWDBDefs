@@ -23,7 +23,7 @@ namespace DBDefsLib
             if (lines[0].StartsWith("COLUMNS"))
             {
                 lineNumber++;
-                while (true)
+                while (lineNumber < lines.Count())
                 {
                     var line = lines[lineNumber++];
 
@@ -371,6 +371,11 @@ namespace DBDefsLib
                         if ((columnDefinitionDictionary[definition.name].type != "int" && columnDefinitionDictionary[definition.name].type != "uint") && definition.size != 0){
                             throw new Exception("Version definition " + definition.name + " is NOT an int/uint but has size in file " + file + "!");
                         }
+                    }
+
+                    if(version.definitions.GroupBy(n => n.name).Any(c => c.Count() > 1))
+                    {
+                        throw new Exception("Version definitions contains multiple columns of the same name!");
                     }
                 }
 

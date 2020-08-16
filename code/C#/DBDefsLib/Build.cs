@@ -9,6 +9,11 @@ namespace DBDefsLib
         public short minor;
         public uint build;
 
+        /// <summary>
+        /// Serialization requirement.
+        /// </summary>
+        private Build() { }
+
         public Build(string buildString)
         {
             var split = buildString.Split('.');
@@ -26,7 +31,13 @@ namespace DBDefsLib
 
         public override bool Equals(object obj)
         {
-            return Equals(obj as Build);
+            var build = obj as Build;
+            if (build == null)
+            {
+                return false;
+            }
+
+            return Equals(build);
         }
 
         public override int GetHashCode()
@@ -127,6 +138,34 @@ namespace DBDefsLib
         }
 
         #endregion
+
+        public static bool TryParse(string value, out Build result)
+        {
+            result = null;
+
+            var split = value.Split('.');
+            if (split.Length != 4)
+                return false;
+
+            if (!short.TryParse(split[0], out var expansion))
+                return false;
+            if (!short.TryParse(split[1], out var major))
+                return false;
+            if (!short.TryParse(split[2], out var minor))
+                return false;
+            if (!uint.TryParse(split[3], out var build))
+                return false;
+
+            result = new Build()
+            {
+                build = build,
+                expansion = expansion,
+                major = major,
+                minor = minor
+            };
+
+            return true;
+        }
     }
 }
 
