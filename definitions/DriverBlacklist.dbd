@@ -1,7 +1,7 @@
 COLUMNS
 int ID
 int DeviceID
-int DriverVersionHigh
+int DriverVersionHi
 int DriverVersionLow
 int Flags
 int OsBits
@@ -14,7 +14,7 @@ BUILD 5.4.2.17645-5.4.8.18414
 $id$ID<32>
 VendorID<32>
 DeviceID<32>
-DriverVersionHigh<32>
+DriverVersionHi<32>
 DriverVersionLow<32>
 OsVersion<32>
 OsBits<32>

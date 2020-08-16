@@ -1,16 +1,17 @@
 COLUMNS
 int ID
-int<SkillLine::ID> SkilllineID
-int<TradeSkillCategory::ID> ParenttradeskillcategoryID
-int Orderindex
+int<SkillLine::ID> SkillLineID
+int<TradeSkillCategory::ID> ParentTradeSkillCategoryID
+int OrderIndex
 locstring Name_lang
 int Flags
+locstring HordeName_lang
 
 BUILD 6.0.1.18179
 BUILD 5.0.1.15640-5.4.8.18414
 $id$ID<32>
-SkilllineID<32>
-ParenttradeskillcategoryID<32>
-Orderindex<32>
+SkillLineID<32>
+ParentTradeSkillCategoryID<32>
+OrderIndex<32>
 Name_lang
 Flags<32>

@@ -1,19 +1,20 @@
 COLUMNS
 int ID
-int Field_5_0_1_15464_002?
 int<BattlePetAbility::ID> BattlePetAbilityID
 int<BattlePetVisual::ID> BattlePetVisualID
-int Duration
-int HasEffect
-int Effect
+int EventTypeEnum
+int OrderIndex
+int TurnTypeEnum
+int Field_5_0_1_15464_002?
 
+BUILD 6.0.1.18179
 BUILD 5.0.1.15544-5.4.8.18414
 $id$ID<32>
 BattlePetAbilityID<32>
 BattlePetVisualID<32>
-Duration<32>
-HasEffect<32>
-Effect<32>
+OrderIndex<32>
+TurnTypeEnum<32>
+EventTypeEnum<32>
 
 BUILD 5.0.1.15464-5.0.1.15508
 $id$ID<32>

@@ -13,10 +13,6 @@ float Box_yaw
 int ShapeType
 int ShapeID
 int<AreaTriggerActionSet::ID> AreaTriggerActionSetID
-float X
-float Y
-float Z
-int PhaseShift
 
 BUILD 5.0.2.15827-5.4.8.18414
 $id$ID<32>
@@ -57,19 +53,6 @@ Pos[3]
 PhaseUseFlags<32>
 PhaseID<32>
 PhaseGroupID<32>
-Radius
-Box_length
-Box_width
-Box_height
-Box_yaw
-
-BUILD 4.0.0.11792
-$id$ID<32>
-ContinentID<32>
-X
-Y
-Z
-PhaseShift<32>
 Radius
 Box_length
 Box_width

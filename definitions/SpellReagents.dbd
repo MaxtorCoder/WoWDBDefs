@@ -1,13 +1,13 @@
 COLUMNS
 int ID
 int ReagentCount
-int Reagents
-int CurrencyID
-int CurrencyCount
+int Reagent
+int CurrencyID?
+int CurrencyCount?
 
 BUILD 5.0.1.15508-5.4.8.18414
 $id$ID<32>
-Reagents<32>[8]
+Reagent<32>[8]
 ReagentCount<32>[8]
 CurrencyID<32>
 CurrencyCount<32>
@@ -15,5 +15,5 @@ CurrencyCount<32>
 BUILD 5.0.1.15464
 BUILD 4.2.0.12232-4.3.4.15595
 $id$ID<32>
-Reagents<32>[8]
+Reagent<32>[8]
 ReagentCount<32>[8]
