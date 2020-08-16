@@ -1,7 +1,7 @@
 COLUMNS
 int ID?
-int Field_792467981?
-int Field_4258822546?
+int Field_5_3_0_16965_002?
+int Field_5_3_0_16965_004?
 int Index?
 int UpgradeID?
 
@@ -9,6 +9,6 @@ BUILD 6.0.1.18179
 BUILD 5.3.0.16965-5.4.8.18414
 $id$ID<32>
 Index<32>
-Field_792467981<32>
+Field_5_3_0_16965_002<32>
 UpgradeID<32>
-Field_4258822546<32>
+Field_5_3_0_16965_004<32>

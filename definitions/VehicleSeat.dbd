@@ -62,110 +62,27 @@ int<CameraMode::ID> CameraModeID
 int FlagsC
 int<FileData::ID> UiSkinFileDataID
 int UiSkin
-float Field_232420222?
-float Field_1905230915?
-int Field_1142999849?
-int Field_1040616595?
-int Field_620744028?
-int Field_1489215088?
-float Field_841128422?
-float Field_2115316732?
-float Field_1430738238?
-float Field_1684235794?
-float Field_608236826?
-float Field_183226221?
-float Field_1957638249?
-int Field_1135150112?
-int Field_1566104791?
-int Field_2133159454?
-int Field_1062248482?
-int Field_1487261183?
-int Field_1435406699?
-float Field_1455491024?
-float Field_980573106?
-float Field_732617471?
-float Field_1451462900?
-float Field_793359381?
-float Field_1727600800?
-float Field_542594836?
-int Field_389277706?
-int Field_726815836?
-int Field_452558064?
-int Field_1241178517?
-int Field_1634837275?
-int Field_553980080?
-int Field_682693539?
-int Field_1178240579?
-int Field_1350288764?
-int Field_465834834?
-float Field_1984461910?
-float Field_902213479?
-float Field_1524798402?
-float Field_1893308211?
-float Field_1714593342?
-int Field_1937947694?
-int Field_1650861936?
-int Field_739674084?
-int Field_2078451945?
-float Field_1449547970?
-float Field_1092748112?
-float Field_727182110?
-float Field_1875085423?
-float Field_1443057119?
-float Field_1166440167?
-float Field_1817887626?
-float Field_1437119901?
-float Field_1673448155?
-int Field_018692224?
-int Field_1059398297?
-int Field_2013363561?
-int Field_1909236014?
-int Field_872611341?
-int Field_1637744738?
-int Field_512049281?
 int Field2A0
-float Field_9738530311?
-float Field_982420482?
-float Field_4455914136?
-float Field_6290286949?
-int Field_1633394370?
-float Field_3041595035?
-float Field_8332494757?
-int Field_1817265833?
-float Field_1025983733?
-float Field_5815312818?
-int Field_1590715642?
-float Field_6987769006?
-int Field_687374775?
-float Field_5447679895?
-float Field_6095505583?
-float Field_3739202448?
-float Field_7037144087?
-float Field_2242787220?
-float Field_8762735034?
-float Field_9742117887?
-float Field_8937663584?
-float Field_8259927992?
-float Field_2082923167?
-float Field_3338456839?
-float Field_1902202452?
-int Field_827055476?
-float Field_8186022782?
-float Field_9859262923?
-int Field_4842545899?
-float Field_2130223993?
-float Field_8977034007?
-float Field_3509354755?
-int Field_9754146821?
-float Field_6686025921?
-float Field_6605586231?
-float Field_6090622793?
-float Field_1160305869?
-float Field_2360499590?
-float Field_1880240520?
-float Field_7331797204?
-float Field_3435685626?
-float Field_9231563745?
+float Field_3_1_0_9767_001?
+float Field_3_1_0_9767_004?
+float Field_3_1_0_9767_017?
+float Field_3_1_0_9767_029?
+int Field_3_1_0_9767_034?
+float Field_3_1_0_9767_037?
+float Field_3_1_0_9767_038?
+int Field_3_1_0_9767_041?
+float Field_3_1_0_9767_044?
+float Field_3_1_0_9767_045?
+int Field_3_1_0_9767_046?
+float Field_3_1_0_9767_047?
+int Field_3_1_0_9767_048?
+float Field_3_1_0_9767_049?
+float Field_3_1_0_9767_050?
+float Field_3_1_0_9767_051?
+float Field_3_1_0_9767_052?
+float Field_3_1_0_9767_053?
+float Field_3_1_0_9767_054?
+float Field_3_1_0_9767_055?
 
 BUILD 6.0.1.18179
 BUILD 5.0.1.15464-5.4.8.18414
@@ -231,341 +148,6 @@ VehicleExitAnimKitID<32>
 CameraModeID<32>
 FlagsC<32>
 UiSkinFileDataID<32>
-
-LAYOUT 242E0ECD
-BUILD 7.3.5.26654, 7.3.5.26822, 7.3.5.26899, 7.3.5.26972, 8.0.1.26095, 8.0.1.26175, 8.0.1.26231, 8.0.1.26287
-$noninline,id$ID<32>
-Flags<32>
-FlagsB<32>
-FlagsC<32>
-AttachmentOffset[3]
-EnterPreDelay
-EnterSpeed
-EnterGravity
-EnterMinDuration
-EnterMaxDuration
-EnterMinArcHeight
-EnterMaxArcHeight
-ExitPreDelay
-ExitSpeed
-ExitGravity
-ExitMinDuration
-ExitMaxDuration
-ExitMinArcHeight
-ExitMaxArcHeight
-PassengerYaw
-PassengerPitch
-PassengerRoll
-VehicleEnterAnimDelay
-VehicleExitAnimDelay
-CameraEnteringDelay
-CameraEnteringDuration
-CameraExitingDelay
-CameraExitingDuration
-CameraOffset[3]
-CameraPosChaseRate
-CameraFacingChaseRate
-CameraEnteringZoom
-CameraSeatZoomMin
-CameraSeatZoomMax
-UiSkinFileDataID<32>
-EnterAnimStart<16>
-EnterAnimLoop<16>
-RideAnimStart<16>
-RideAnimLoop<16>
-RideUpperAnimStart<16>
-RideUpperAnimLoop<16>
-ExitAnimStart<16>
-ExitAnimLoop<16>
-ExitAnimEnd<16>
-VehicleEnterAnim<16>
-VehicleExitAnim<16>
-VehicleRideAnimLoop<16>
-EnterAnimKitID<16>
-RideAnimKitID<16>
-ExitAnimKitID<16>
-VehicleEnterAnimKitID<16>
-VehicleRideAnimKitID<16>
-VehicleExitAnimKitID<16>
-CameraModeID<16>
-AttachmentID<8>
-PassengerAttachmentID<8>
-VehicleEnterAnimBone<8>
-VehicleExitAnimBone<8>
-VehicleRideAnimLoopBone<8>
-VehicleAbilityDisplay<8>
-EnterUISoundID<u32>
-ExitUISoundID<u32>
-
-BUILD 4.0.0.11792
-BUILD 4.0.0.11927-4.0.0.12065
-$id$ID<32>
-Flags<32>
-AttachmentID<32>
-AttachmentOffset[3]
-EnterPreDelay
-EnterSpeed
-EnterGravity
-EnterMinDuration
-EnterMaxDuration
-EnterMinArcHeight
-EnterMaxArcHeight
-EnterAnimStart<32>
-EnterAnimLoop<32>
-RideAnimStart<32>
-RideAnimLoop<32>
-RideUpperAnimStart<32>
-RideUpperAnimLoop<32>
-ExitPreDelay
-ExitSpeed
-ExitGravity
-ExitMinDuration
-ExitMaxDuration
-ExitMinArcHeight
-ExitMaxArcHeight
-ExitAnimStart<32>
-ExitAnimLoop<32>
-ExitAnimEnd<32>
-PassengerYaw
-PassengerPitch
-PassengerRoll
-PassengerAttachmentID<32>
-VehicleEnterAnim<32>
-VehicleExitAnim<32>
-VehicleRideAnimLoop<32>
-VehicleEnterAnimBone<32>
-VehicleExitAnimBone<32>
-VehicleRideAnimLoopBone<32>
-VehicleEnterAnimDelay
-VehicleExitAnimDelay
-VehicleAbilityDisplay<32>
-EnterUISoundID<32>
-ExitUISoundID<32>
-UiSkin<32>
-FlagsB<32>
-CameraEnteringDelay
-CameraEnteringDuration
-CameraExitingDelay
-CameraExitingDuration
-CameraOffset[3]
-CameraPosChaseRate
-CameraFacingChaseRate
-CameraEnteringZoom
-CameraSeatZoomMin
-CameraSeatZoomMax
-EnterAnimKitID<32>
-RideAnimKitID<32>
-ExitAnimKitID<32>
-VehicleEnterAnimKitID<32>
-VehicleRideAnimKitID<32>
-VehicleExitAnimKitID<32>
-
-BUILD 3.0.1.8303
-BUILD 3.0.1.8303-3.0.1.8391
-$id$ID<32>
-Flags<32>
-AttachmentID<32>
-AttachmentOffset[3]
-EnterPreDelay
-EnterSpeed
-EnterGravity
-EnterMinDuration
-EnterMaxDuration
-EnterMinArcHeight
-EnterMaxArcHeight
-EnterAnimStart<32>
-EnterAnimLoop<32>
-RideAnimStart<32>
-RideAnimLoop<32>
-RideUpperAnimStart<32>
-RideUpperAnimLoop<32>
-ExitPreDelay
-ExitSpeed
-ExitGravity
-ExitMinDuration
-ExitMaxDuration
-ExitMinArcHeight
-ExitMaxArcHeight
-ExitAnimStart<32>
-ExitAnimLoop<32>
-ExitAnimEnd<32>
-
-BUILD 3.0.2.8885, 3.0.8.9328
-BUILD 3.0.1.8885-3.0.9.9551
-$id$ID<32>
-Flags<32>
-AttachmentID<32>
-AttachmentOffset[3]
-EnterPreDelay
-EnterSpeed
-EnterGravity
-EnterMinDuration
-EnterMaxDuration
-EnterMinArcHeight
-EnterMaxArcHeight
-EnterAnimStart<32>
-EnterAnimLoop<32>
-RideAnimStart<32>
-RideAnimLoop<32>
-RideUpperAnimStart<32>
-RideUpperAnimLoop<32>
-ExitPreDelay
-ExitSpeed
-ExitGravity
-ExitMinDuration
-ExitMaxDuration
-ExitMinArcHeight
-ExitMaxArcHeight
-ExitAnimStart<32>
-ExitAnimLoop<32>
-ExitAnimEnd<32>
-PassengerYaw
-PassengerPitch
-PassengerRoll
-PassengerAttachmentID<32>
-VehicleEnterAnim<32>
-VehicleExitAnim<32>
-VehicleRideAnimLoop<32>
-VehicleEnterAnimBone<32>
-VehicleExitAnimBone<32>
-VehicleRideAnimLoopBone<32>
-VehicleEnterAnimDelay
-VehicleExitAnimDelay
-VehicleAbilityDisplay<32>
-EnterUISoundID<32>
-ExitUISoundID<32>
-UiSkin<32>
-FlagsB<32>
-
-LAYOUT A0A493A7
-BUILD 8.0.1.26297, 8.0.1.26310, 8.0.1.26321, 8.0.1.26367, 8.0.1.26433, 8.0.1.26476, 8.0.1.26491, 8.0.1.26522, 8.0.1.26530, 8.0.1.26557, 8.0.1.26624, 8.0.1.26629, 8.0.1.26637, 8.0.1.26640, 8.0.1.26683, 8.0.1.26707, 8.0.1.26714, 8.0.1.26715, 8.0.1.26734
-$noninline,id$ID<32>
-Flags<32>
-FlagsB<32>
-FlagsC<32>
-AttachmentOffset[3]
-EnterPreDelay
-EnterSpeed
-EnterGravity
-EnterMinDuration
-EnterMaxDuration
-EnterMinArcHeight
-EnterMaxArcHeight
-ExitPreDelay
-ExitSpeed
-ExitGravity
-ExitMinDuration
-ExitMaxDuration
-ExitMinArcHeight
-ExitMaxArcHeight
-PassengerYaw
-PassengerPitch
-PassengerRoll
-VehicleEnterAnimDelay
-VehicleExitAnimDelay
-UiSkinFileDataID<32>
-CameraEnteringDelay
-CameraEnteringDuration
-CameraExitingDelay
-CameraExitingDuration
-CameraOffset[3]
-CameraPosChaseRate
-CameraFacingChaseRate
-CameraEnteringZoom
-CameraSeatZoomMin
-CameraSeatZoomMax
-EnterAnimStart<16>
-EnterAnimLoop<16>
-RideAnimStart<16>
-RideAnimLoop<16>
-RideUpperAnimStart<16>
-RideUpperAnimLoop<16>
-ExitAnimStart<16>
-ExitAnimLoop<16>
-ExitAnimEnd<16>
-VehicleEnterAnim<16>
-VehicleExitAnim<16>
-VehicleRideAnimLoop<16>
-EnterAnimKitID<16>
-RideAnimKitID<16>
-ExitAnimKitID<16>
-VehicleEnterAnimKitID<16>
-VehicleRideAnimKitID<16>
-VehicleExitAnimKitID<16>
-CameraModeID<16>
-AttachmentID<8>
-VehicleEnterAnimBone<8>
-VehicleExitAnimBone<8>
-VehicleRideAnimLoopBone<8>
-PassengerAttachmentID<8>
-VehicleAbilityDisplay<8>
-EnterUISoundID<32>
-ExitUISoundID<32>
-
-LAYOUT 7AB200FA
-BUILD 8.0.1.26788, 8.0.1.26806, 8.0.1.26812, 8.0.1.26838, 8.0.1.26871, 8.0.1.26877, 8.0.1.26892, 8.0.1.26903, 8.0.1.26918, 8.0.1.26926, 8.0.1.26936, 8.0.1.26949, 8.0.1.26970, 8.0.1.26999, 8.0.1.27004, 8.0.1.27009, 8.0.1.27026, 8.0.1.27075, 8.0.1.27101, 8.0.1.27144
-$noninline,id$ID<32>
-Field_232420222[3]
-Field_1905230915[3]
-Field_1142999849<32>
-Field_1040616595<32>
-Field_620744028<32>
-Field_1489215088<8>
-Field_841128422
-Field_2115316732
-Field_1430738238
-Field_1684235794
-Field_608236826
-Field_183226221
-Field_1957638249
-Field_1135150112<32>
-Field_1566104791<32>
-Field_2133159454<32>
-Field_1062248482<32>
-Field_1487261183<32>
-Field_1435406699<32>
-Field_1455491024
-Field_980573106
-Field_732617471
-Field_1451462900
-Field_793359381
-Field_1727600800
-Field_542594836
-Field_389277706<32>
-Field_726815836<32>
-Field_452558064<32>
-Field_1241178517<16>
-Field_1634837275<8>
-Field_553980080<16>
-Field_682693539<8>
-Field_1178240579<16>
-Field_1350288764<8>
-Field_465834834<8>
-Field_1984461910
-Field_902213479
-Field_1524798402
-Field_1893308211
-Field_1714593342
-Field_1937947694<8>
-Field_1650861936<u32>
-Field_739674084<u32>
-Field_2078451945<32>
-Field_1449547970
-Field_1092748112
-Field_727182110
-Field_1875085423
-Field_1443057119
-Field_1166440167
-Field_1817887626
-Field_1437119901
-Field_1673448155
-Field_018692224<16>
-Field_1059398297<16>
-Field_2013363561<16>
-Field_1909236014<16>
-Field_872611341<16>
-Field_1637744738<16>
-Field_512049281<16>
 
 BUILD 4.0.6.13623-4.3.4.15595
 $id$ID<32>
@@ -694,12 +276,13 @@ VehicleRideAnimKitID<32>
 VehicleExitAnimKitID<32>
 CameraModeID<32>
 
-BUILD 3.3.5.12213-3.3.5.12340
+BUILD 4.0.0.11792
+BUILD 4.0.0.11927-4.0.0.12065
 $id$ID<32>
-Field_8937663584
+Flags<32>
 AttachmentID<32>
 AttachmentOffset[3]
-Field_8259927992
+EnterPreDelay
 EnterSpeed
 EnterGravity
 EnterMinDuration
@@ -712,65 +295,7 @@ RideAnimStart<32>
 RideAnimLoop<32>
 RideUpperAnimStart<32>
 RideUpperAnimLoop<32>
-Field_2082923167
-ExitSpeed
-ExitGravity
-ExitMinDuration
-ExitMaxDuration
-ExitMinArcHeight
-ExitMaxArcHeight
-ExitAnimStart<32>
-ExitAnimLoop<32>
-ExitAnimEnd<32>
-Field_3338456839
-PassengerPitch
-Field_1902202452
-PassengerAttachmentID<32>
-VehicleEnterAnim<32>
-VehicleExitAnim<32>
-VehicleRideAnimLoop<32>
-Field_827055476<32>
-VehicleExitAnimBone<32>
-VehicleEnterAnimBone<32>
-Field_8186022782
-Field_9859262923
-VehicleAbilityDisplay<32>
-EnterUISoundID<32>
-Field_4842545899<32>
-UiSkin<32>
-Field_2130223993
-Field_8977034007
-Field_3509354755
-Field_9754146821<32>
-Field_6686025921
-Field_6605586231
-Field_6090622793
-Field_1160305869
-Field_2360499590
-Field_1880240520
-Field_7331797204
-Field_3435685626
-Field_9231563745
-
-BUILD 3.1.0.9767-3.3.3.11723
-$id$ID<32>
-Field_9738530311
-AttachmentID<32>
-AttachmentOffset[3]
-Field_982420482
-EnterSpeed
-EnterGravity
-EnterMinDuration
-EnterMaxDuration
-EnterMinArcHeight
-EnterMaxArcHeight
-EnterAnimStart<32>
-EnterAnimLoop<32>
-RideAnimStart<32>
-RideAnimLoop<32>
-RideUpperAnimStart<32>
-RideUpperAnimLoop<32>
-Field_4455914136
+ExitPreDelay
 ExitSpeed
 ExitGravity
 ExitMinDuration
@@ -782,33 +307,143 @@ ExitAnimLoop<32>
 ExitAnimEnd<32>
 PassengerYaw
 PassengerPitch
-Field_6290286949
+PassengerRoll
 PassengerAttachmentID<32>
 VehicleEnterAnim<32>
 VehicleExitAnim<32>
 VehicleRideAnimLoop<32>
-Field_1633394370<32>
-VehicleExitAnimBone<32>
 VehicleEnterAnimBone<32>
-Field_3041595035
-Field_8332494757
+VehicleExitAnimBone<32>
+VehicleRideAnimLoopBone<32>
+VehicleEnterAnimDelay
+VehicleExitAnimDelay
 VehicleAbilityDisplay<32>
 EnterUISoundID<32>
-Field_1817265833<32>
+ExitUISoundID<32>
 UiSkin<32>
 FlagsB<32>
-Field_1025983733
-Field_5815312818
-Field_1590715642<32>
-Field_6987769006
-Field_687374775<32>
-Field_5447679895
-Field_6095505583
-Field_3739202448
-Field_7037144087
-Field_2242787220
-Field_8762735034
-Field_9742117887
+CameraEnteringDelay
+CameraEnteringDuration
+CameraExitingDelay
+CameraExitingDuration
+CameraOffset[3]
+CameraPosChaseRate
+CameraFacingChaseRate
+CameraEnteringZoom
+CameraSeatZoomMin
+CameraSeatZoomMax
+EnterAnimKitID<32>
+RideAnimKitID<32>
+ExitAnimKitID<32>
+VehicleEnterAnimKitID<32>
+VehicleRideAnimKitID<32>
+VehicleExitAnimKitID<32>
+
+BUILD 3.1.0.9767-3.3.3.11723
+$id$ID<32>
+Field_3_1_0_9767_001
+AttachmentID<32>
+AttachmentOffset[3]
+Field_3_1_0_9767_004
+EnterSpeed
+EnterGravity
+EnterMinDuration
+EnterMaxDuration
+EnterMinArcHeight
+EnterMaxArcHeight
+EnterAnimStart<32>
+EnterAnimLoop<32>
+RideAnimStart<32>
+RideAnimLoop<32>
+RideUpperAnimStart<32>
+RideUpperAnimLoop<32>
+Field_3_1_0_9767_017
+ExitSpeed
+ExitGravity
+ExitMinDuration
+ExitMaxDuration
+ExitMinArcHeight
+ExitMaxArcHeight
+ExitAnimStart<32>
+ExitAnimLoop<32>
+ExitAnimEnd<32>
+PassengerYaw
+PassengerPitch
+Field_3_1_0_9767_029
+PassengerAttachmentID<32>
+VehicleEnterAnim<32>
+VehicleExitAnim<32>
+VehicleRideAnimLoop<32>
+Field_3_1_0_9767_034<32>
+VehicleExitAnimBone<32>
+VehicleEnterAnimBone<32>
+Field_3_1_0_9767_037
+Field_3_1_0_9767_038
+VehicleAbilityDisplay<32>
+EnterUISoundID<32>
+Field_3_1_0_9767_041<32>
+UiSkin<32>
+FlagsB<32>
+Field_3_1_0_9767_044
+Field_3_1_0_9767_045
+Field_3_1_0_9767_046<32>
+Field_3_1_0_9767_047
+Field_3_1_0_9767_048<32>
+Field_3_1_0_9767_049
+Field_3_1_0_9767_050
+Field_3_1_0_9767_051
+Field_3_1_0_9767_052
+Field_3_1_0_9767_053
+Field_3_1_0_9767_054
+Field_3_1_0_9767_055
+
+BUILD 3.0.8.9328
+BUILD 3.0.2.8885
+BUILD 3.0.1.8885-3.0.9.9551
+$id$ID<32>
+Flags<32>
+AttachmentID<32>
+AttachmentOffset[3]
+EnterPreDelay
+EnterSpeed
+EnterGravity
+EnterMinDuration
+EnterMaxDuration
+EnterMinArcHeight
+EnterMaxArcHeight
+EnterAnimStart<32>
+EnterAnimLoop<32>
+RideAnimStart<32>
+RideAnimLoop<32>
+RideUpperAnimStart<32>
+RideUpperAnimLoop<32>
+ExitPreDelay
+ExitSpeed
+ExitGravity
+ExitMinDuration
+ExitMaxDuration
+ExitMinArcHeight
+ExitMaxArcHeight
+ExitAnimStart<32>
+ExitAnimLoop<32>
+ExitAnimEnd<32>
+PassengerYaw
+PassengerPitch
+PassengerRoll
+PassengerAttachmentID<32>
+VehicleEnterAnim<32>
+VehicleExitAnim<32>
+VehicleRideAnimLoop<32>
+VehicleEnterAnimBone<32>
+VehicleExitAnimBone<32>
+VehicleRideAnimLoopBone<32>
+VehicleEnterAnimDelay
+VehicleExitAnimDelay
+VehicleAbilityDisplay<32>
+EnterUISoundID<32>
+ExitUISoundID<32>
+UiSkin<32>
+FlagsB<32>
 
 BUILD 3.0.1.8770-3.0.1.8874
 $id$ID<32>
@@ -929,3 +564,33 @@ PassengerYaw
 PassengerPitch
 PassengerRoll
 PassengerAttachmentID<32>
+
+BUILD 3.0.1.8303
+BUILD 3.0.1.8303-3.0.1.8391
+$id$ID<32>
+Flags<32>
+AttachmentID<32>
+AttachmentOffset[3]
+EnterPreDelay
+EnterSpeed
+EnterGravity
+EnterMinDuration
+EnterMaxDuration
+EnterMinArcHeight
+EnterMaxArcHeight
+EnterAnimStart<32>
+EnterAnimLoop<32>
+RideAnimStart<32>
+RideAnimLoop<32>
+RideUpperAnimStart<32>
+RideUpperAnimLoop<32>
+ExitPreDelay
+ExitSpeed
+ExitGravity
+ExitMinDuration
+ExitMaxDuration
+ExitMinArcHeight
+ExitMaxArcHeight
+ExitAnimStart<32>
+ExitAnimLoop<32>
+ExitAnimEnd<32>
