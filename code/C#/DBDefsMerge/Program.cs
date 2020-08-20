@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using DBDefsLib;
 using static DBDefsLib.Structs;
 
@@ -11,14 +12,14 @@ namespace DBDefsMerge
     {
         static void Main(string[] args)
         {
-            if(args.Length < 3)
+            if (args.Length < 3)
             {
                 Console.WriteLine("Usage: <firstdir> <seconddir> <outdir>");
                 Environment.Exit(1);
             }
 
             var numLayoutsAdded = 0;
-            
+
             var firstDir = args[0];
             var secondDir = args[1];
             var targetDir = args[2];
@@ -46,7 +47,7 @@ namespace DBDefsMerge
                     var newDefinition = firstFile;
 
                     // Merge column definitions
-                    foreach(var columnDefinition2 in secondFile.columnDefinitions)
+                    foreach (var columnDefinition2 in secondFile.columnDefinitions)
                     {
                         var foundCol = false;
                         foreach (var columnDefinition1 in firstFile.columnDefinitions)
@@ -61,10 +62,13 @@ namespace DBDefsMerge
                                     Console.WriteLine("Types are different for (1)" + dbName + "::" + columnDefinition1.Key + " = " + columnDefinition1.Value.type + " and (2)" + dbName + "::" + columnDefinition2.Key + " = " + columnDefinition2.Value.type + ", using type " + columnDefinition2.Value.type + " from 2");
 
                                     // If this is an uncommon conversion (not uint -> int or vice versa) throw an error
-                                    if ((columnDefinition1.Value.type == "uint" && columnDefinition2.Value.type == "int") || (columnDefinition1.Value.type == "int" && columnDefinition2.Value.type == "uint")) {
+                                    if ((columnDefinition1.Value.type == "uint" && columnDefinition2.Value.type == "int") || (columnDefinition1.Value.type == "int" && columnDefinition2.Value.type == "uint"))
+                                    {
                                         Console.ForegroundColor = ConsoleColor.Yellow;
                                         Console.WriteLine("Type difference for column (1)" + dbName + "::" + columnDefinition1.Key + " = " + columnDefinition1.Value.type + " and(2)" + dbName + "::" + columnDefinition2.Key + " = " + columnDefinition2.Value.type + ", ignoring..");
-                                    } else {
+                                    }
+                                    else
+                                    {
                                         throw new Exception("bad type difference, refusing to handle");
                                     }
 
@@ -73,15 +77,15 @@ namespace DBDefsMerge
 
                                 if (columnDefinition2.Key != columnDefinition1.Key)
                                 {
-                                    if(Utils.NormalizeColumn(columnDefinition2.Key, true) == columnDefinition1.Key)
+                                    if (Utils.NormalizeColumn(columnDefinition2.Key, true) == columnDefinition1.Key)
                                     {
                                         Console.ForegroundColor = ConsoleColor.Green;
                                         Console.WriteLine("Automagically fixed casing issue between (1)" + dbName + "::" + columnDefinition1.Key + " and (2)" + dbName + "::" + columnDefinition2.Key);
-                                        for(var i = 0; i < secondFile.versionDefinitions.Length; i++)
+                                        for (var i = 0; i < secondFile.versionDefinitions.Length; i++)
                                         {
                                             for (var j = 0; j < secondFile.versionDefinitions[i].definitions.Length; j++)
                                             {
-                                                if(secondFile.versionDefinitions[i].definitions[j].name == columnDefinition2.Key)
+                                                if (secondFile.versionDefinitions[i].definitions[j].name == columnDefinition2.Key)
                                                 {
                                                     secondFile.versionDefinitions[i].definitions[j].name = Utils.NormalizeColumn(columnDefinition2.Key, true);
                                                     break;
@@ -109,7 +113,7 @@ namespace DBDefsMerge
                                 }
 
                                 // Merge comments
-                                if(columnDefinition2.Value.comment != columnDefinition1.Value.comment)
+                                if (columnDefinition2.Value.comment != columnDefinition1.Value.comment)
                                 {
                                     for (var i = 0; i < secondFile.versionDefinitions.Length; i++)
                                     {
@@ -139,7 +143,7 @@ namespace DBDefsMerge
                                 }
 
                                 // Merge foreignTable/foreignKey
-                                if(columnDefinition2.Value.foreignTable != columnDefinition1.Value.foreignTable || columnDefinition2.Value.foreignColumn != columnDefinition1.Value.foreignColumn)
+                                if (columnDefinition2.Value.foreignTable != columnDefinition1.Value.foreignTable || columnDefinition2.Value.foreignColumn != columnDefinition1.Value.foreignColumn)
                                 {
                                     for (var i = 0; i < secondFile.versionDefinitions.Length; i++)
                                     {
@@ -182,60 +186,13 @@ namespace DBDefsMerge
                     }
 
                     // Merge version definitions
-                    foreach(var versionDefinition2 in secondFile.versionDefinitions)
+                    foreach (var versionDefinition2 in secondFile.versionDefinitions)
                     {
                         var foundVersion = false;
-                        foreach(var versionDefinition1 in firstFile.versionDefinitions)
+                        foreach (var versionDefinition1 in firstFile.versionDefinitions)
                         {
-                            foreach(var layoutHash2 in versionDefinition2.layoutHashes)
-                            {
-                                if (versionDefinition1.layoutHashes.Contains(layoutHash2))
-                                {
-                                    foundVersion = true;
-                                    break;
-                                }
-                            }
-
-                            // If layouthash was found, don't check builds
-                            if (foundVersion)
-                            {
+                            if (foundVersion = VersionsOverlap(versionDefinition1, versionDefinition2))
                                 break;
-                            }
-
-                            // Check builds
-                            foreach(var build2 in versionDefinition2.builds)
-                            {
-                                foreach(var build1 in versionDefinition1.builds)
-                                {
-                                    if (build1.Equals(build2))
-                                    {
-                                        foundVersion = true;
-                                        break;
-                                    }
-                                }
-
-                                // Stop checking if build already exists
-                                if (foundVersion)
-                                {
-                                    break;
-                                }
-
-                                foreach (var buildranges1 in versionDefinition1.buildRanges)
-                                {
-                                    if (buildranges1.Contains(build2))
-                                    {
-                                        Console.WriteLine(build2.ToString() + " is in build range " + buildranges1.ToString());
-                                        foundVersion = true;
-                                        break;
-                                    }
-                                }
-
-                                // Stop checking if build exists in ranges
-                                if (foundVersion)
-                                {
-                                    break;
-                                }
-                            }
                         }
 
                         if (!foundVersion)
@@ -244,7 +201,7 @@ namespace DBDefsMerge
                             var mergedWithPreviousBuild = false;
                             var newVersions = newDefinition.versionDefinitions.ToList();
 
-                            for(var i = 0; i < newVersions.Count; i++)
+                            for (var i = 0; i < newVersions.Count; i++)
                             {
                                 if (newVersions[i].definitions.SequenceEqual(versionDefinition2.definitions))
                                 {
@@ -295,46 +252,43 @@ namespace DBDefsMerge
 
                             for (var i = 0; i < newVersions.Count; i++)
                             {
-                                foreach (var layoutHash2 in versionDefinition2.layoutHashes)
+                                if (VersionsOverlap(newVersions[i], versionDefinition2))
                                 {
-                                    if (newVersions[i].layoutHashes.Contains(layoutHash2))
+                                    // Make list from current builds
+                                    var curBuilds = newVersions[i].builds.ToList();
+                                    curBuilds.AddRange(versionDefinition2.builds.ToList());
+
+                                    // Make list from current build ranges
+                                    var curBuildRanges = newVersions[i].buildRanges.ToList();
+                                    curBuildRanges.AddRange(versionDefinition2.buildRanges.ToList());
+
+                                    // Make list of current layouthashes
+                                    var curLayouthashes = newVersions[i].layoutHashes.ToList();
+                                    curLayouthashes.AddRange(versionDefinition2.layoutHashes.ToList());
+
+                                    // Create temporary version object based of newVersion
+                                    var tempVersion = newVersions[i];
+
+                                    // Override builds with new list
+                                    tempVersion.builds = curBuilds.Distinct().ToArray();
+
+                                    // Override buildranges with new list
+                                    tempVersion.buildRanges = curBuildRanges.Distinct().ToArray();
+
+                                    // Override layoutHashes with new list
+                                    tempVersion.layoutHashes = curLayouthashes.Distinct().ToArray();
+
+                                    for (var j = 0; j < versionDefinition2.definitions.Count(); j++)
                                     {
-                                        // Make list from current builds
-                                        var curBuilds = newVersions[i].builds.ToList();
-                                        curBuilds.AddRange(versionDefinition2.builds.ToList());
-
-                                        // Make list from current build ranges
-                                        var curBuildRanges = newVersions[i].buildRanges.ToList();
-                                        curBuildRanges.AddRange(versionDefinition2.buildRanges.ToList());
-
-                                        // Make list of current layouthashes
-                                        var curLayouthashes = newVersions[i].layoutHashes.ToList();
-                                        curLayouthashes.AddRange(versionDefinition2.layoutHashes.ToList());
-
-                                        // Create temporary version object based of newVersion
-                                        var tempVersion = newVersions[i];
-
-                                        // Override builds with new list
-                                        tempVersion.builds = curBuilds.Distinct().ToArray();
-
-                                        // Override buildranges with new list
-                                        tempVersion.buildRanges = curBuildRanges.Distinct().ToArray();
-
-                                        // Override layoutHashes with new list
-                                        tempVersion.layoutHashes = curLayouthashes.Distinct().ToArray();
-
-                                        for (var j = 0; j < versionDefinition2.definitions.Count(); j++)
+                                        // Merge signedness from second file if it is different from current
+                                        if (versionDefinition2.definitions[j].isSigned != tempVersion.definitions[j].isSigned)
                                         {
-                                            // Merge signedness from second file if it is different from current
-                                            if (versionDefinition2.definitions[j].isSigned != tempVersion.definitions[j].isSigned)
-                                            {
-                                                tempVersion.definitions[j].isSigned = versionDefinition2.definitions[j].isSigned;
-                                            }
+                                            tempVersion.definitions[j].isSigned = versionDefinition2.definitions[j].isSigned;
                                         }
-
-                                        // Override newVersion with temporary version object
-                                        newVersions[i] = tempVersion;
                                     }
+
+                                    // Override newVersion with temporary version object
+                                    newVersions[i] = tempVersion;
                                 }
                             }
 
@@ -351,7 +305,7 @@ namespace DBDefsMerge
                 }
             }
 
-            foreach(var file in firstDirFiles)
+            foreach (var file in firstDirFiles)
             {
                 if (!secondDirFilesLC.Contains(file.ToLower()))
                 {
@@ -420,11 +374,11 @@ namespace DBDefsMerge
                 foreach (var columnDefinition in columnDefinitionsCopy)
                 {
                     var columnUsed = false;
-                    foreach(var versionDefinition in definitionCopy.versionDefinitions)
+                    foreach (var versionDefinition in definitionCopy.versionDefinitions)
                     {
-                        foreach(var definition in versionDefinition.definitions)
+                        foreach (var definition in versionDefinition.definitions)
                         {
-                            if(definition.name == columnDefinition.Key)
+                            if (definition.name == columnDefinition.Key)
                             {
                                 columnUsed = true;
                             }
@@ -441,6 +395,37 @@ namespace DBDefsMerge
             }
             Console.WriteLine("Done, " + numLayoutsAdded + " new layouts added!");
             //Console.ReadLine();
+        }
+
+        private static bool VersionsOverlap(VersionDefinitions versionDefinition1, VersionDefinitions versionDefinition2)
+        {
+            // If layouthash was found, don't check builds
+            if (versionDefinition1.layoutHashes.Intersect(versionDefinition2.layoutHashes).Any())
+                return true;
+
+            // Stop checking if build already exists
+            if (versionDefinition1.builds.Intersect(versionDefinition2.builds).Any())
+                return true;
+
+            // Stop checking if ranges intersect
+            if (versionDefinition1.buildRanges.Intersect(versionDefinition2.buildRanges).Any())
+                return true;
+
+            var v1Builds = versionDefinition1.builds.ToList();
+            v1Builds.AddRange(versionDefinition1.buildRanges.Select(br => br.minBuild));
+            v1Builds.AddRange(versionDefinition1.buildRanges.Select(br => br.maxBuild));
+
+            if (v1Builds.FindIndex(build => versionDefinition2.buildRanges.Any(br => br.Contains(build))) > -1)
+                return true;
+
+            var v2Builds = versionDefinition2.builds.ToList();
+            v2Builds.AddRange(versionDefinition2.buildRanges.Select(br => br.minBuild));
+            v2Builds.AddRange(versionDefinition2.buildRanges.Select(br => br.maxBuild));
+
+            if (v2Builds.FindIndex(build => versionDefinition1.buildRanges.Any(br => br.Contains(build))) > -1)
+                return true;
+
+            return false;
         }
     }
 }
