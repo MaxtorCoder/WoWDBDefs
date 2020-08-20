@@ -1,0 +1,51 @@
+COLUMNS
+int ID
+int<FileData::ID> Visual
+int VisualScale
+int Duration
+int Trajectory // 0 = AtSource, 1 = AtTarget, 2 = Straight, 3 = CurveLeft, 4 = CurveRight, 5 = CurveRandom, 6: HalfwayBetween
+int<SoundKit::ID> StartSoundKitID
+int<SoundKit::ID> FinishSoundKitID
+int StartBehavior // 0 = None, 1 = TargetShake, 2 = TargetKnockBack, 3 = SourceRecoil, 4 = SourceCollideWithTarget
+int FinishBehavior // same enum as StartBehavior
+int<UIScriptedAnimationEffect::ID> FinishEffectID
+float YawRadians
+float PitchRadians
+float RollRadians
+float OffsetX
+float OffsetY
+float OffsetZ
+float AnimationSpeed
+
+LAYOUT EA6DD175
+BUILD 9.0.1.34081, 9.0.1.34098, 9.0.1.34137, 9.0.1.34199
+$id$ID<32>
+Visual<32>
+VisualScale<32>
+Duration<32>
+Trajectory<32>
+StartSoundKitID<32>
+FinishSoundKitID<32>
+StartBehavior<32>
+FinishBehavior<32>
+FinishEffectID<32>
+
+LAYOUT BBA9C412
+BUILD 9.0.1.34278, 9.0.1.34324, 9.0.1.34365, 9.0.1.34392, 9.0.1.34490, 9.0.1.34615, 9.0.1.34714, 9.0.1.34821, 9.0.1.34902, 9.0.1.34972, 9.0.1.35078, 9.0.1.35167, 9.0.1.35213, 9.0.1.35256, 9.0.1.35282, 9.0.1.35360, 9.0.1.35432, 9.0.1.35482, 9.0.1.35522, 9.0.1.35598
+$id$ID<32>
+Visual<32>
+VisualScale<32>
+Duration<32>
+Trajectory<32>
+StartSoundKitID<32>
+FinishSoundKitID<32>
+StartBehavior<32>
+FinishBehavior<32>
+FinishEffectID<32>
+YawRadians
+PitchRadians
+RollRadians
+OffsetX
+OffsetY
+OffsetZ
+AnimationSpeed
