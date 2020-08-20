@@ -8,7 +8,7 @@ float PowerCostMaxPct
 float PowerCostPct
 int PowerCost? // original implementation of PowerCostPct
 int<PowerDisplay::ID> PowerDisplayID
-int PowerType
+int<PowerType::PowerTypeEnum> PowerType
 int<Spell::ID> RequiredAuraSpellID
 int<Spell::ID> SpellID
 int DifficultyID?

@@ -7,7 +7,7 @@ locstring Name_female_lang
 locstring Name_male_lang
 string Filename
 int SpellClassSet
-int Flags
+int Flags // &0x800: !allowBoost, &0x2000: earlyFactionChoice
 int<CinematicSequences::ID> CinematicSequenceID
 int AttackPowerPerStrength
 int AttackPowerPerAgility

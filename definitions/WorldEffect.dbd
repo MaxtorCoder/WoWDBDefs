@@ -1,11 +1,11 @@
 COLUMNS
 int ID
 int TargetType
-int TargetAsset
+int TargetAsset // depending on TargetType: 1: CreatureID, 2: GameObjectID
 int<QuestFeedbackEffect::ID> QuestFeedbackEffectID
-int PlayerConditionID
-int CombatConditionID
-int WhenToDisplay
+int<PlayerCondition::ID> PlayerConditionID
+int<CombatCondition::ID> CombatConditionID
+int WhenToDisplay // bitmask: 1: is_quest_objective_completeable, 2: is_quest_objective_complete
 
 BUILD 6.0.1.18179
 BUILD 5.0.1.15662-5.4.8.18414

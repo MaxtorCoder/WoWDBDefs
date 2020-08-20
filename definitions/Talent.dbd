@@ -7,11 +7,11 @@ int<Spell::ID> SpellID
 int Flags
 int CategoryMask
 int ClassID
-int OverridesSpellID
+int<Spell::ID> OverridesSpellID
 locstring Description_lang
 int TabID
 int SpellRank
-int PrereqTalent
+int<Talent::ID> PrereqTalent
 int PrereqRank
 int<Spell::ID> RequiredSpellID
 

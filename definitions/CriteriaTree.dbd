@@ -3,15 +3,15 @@ int ID
 int<Criteria::ID> CriteriaID
 int Amount
 int Operator
-int Parent
+int<CriteriaTree::ID> Parent
 int Flags
 locstring Description_lang
 int OrderIndex
 int Padding_5_0_1_15640_008?
 
 BUILD 6.0.1.18179
-BUILD 5.0.1.15640-5.4.8.18414
 BUILD 6.0.1.18125-6.2.4.21742
+BUILD 5.0.1.15640-5.4.8.18414
 $id$ID<32>
 CriteriaID<32>
 Amount<64>

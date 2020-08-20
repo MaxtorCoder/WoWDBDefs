@@ -2,9 +2,9 @@ COLUMNS
 int ID
 locstring Name_lang
 int<ResearchField::ID> ResearchFieldID
-int CurrencyID
+int<CurrencyTypes::ID> CurrencyID
 string Texture
-int ItemID
+int<Item::ID> ItemID
 
 BUILD 6.0.1.18179
 BUILD 6.0.1.18125-6.2.4.21742

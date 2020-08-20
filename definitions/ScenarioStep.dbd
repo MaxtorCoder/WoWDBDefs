@@ -1,6 +1,6 @@
 COLUMNS
 int ID
-int CriteriatreeID
+int<CriteriaTree::ID> CriteriatreeID
 int<Scenario::ID> ScenarioID
 int OrderIndex
 locstring Description_lang

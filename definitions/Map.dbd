@@ -5,7 +5,7 @@ int PVP
 int IsInMap
 locstring MapName_lang
 int InstanceType // Integer 0: none, 1: party, 2: raid, 3: pvp, 4: arena, >=5: none (official from "IsInInstance()")
-int MapType // flags2?
+int MapType
 int MinLevel
 int MaxLevel
 int MaxPlayers
@@ -18,7 +18,7 @@ int<AreaTable::ID> AreaTableID
 float MinimapIconScale
 int TimeOfDayOverride // Set to -1 for everything but Orgrimmar and Dalaran arena. For those, the time of day will change to this.
 int ExpansionID // Vanilla: 0, BC: 1, WotLK: 2 # todo enum
-int Flags? // probaby same as isBattleground
+int Flags? // &0x100: CanChangeDifficulty
 int<Map::ID> CorpseMapID
 float Corpse // Array of CorpsePosX/CorpsePosY
 float Field_0_7_0_3694_007?

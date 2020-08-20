@@ -3,7 +3,7 @@ int ID
 float Coefficient
 float Variance
 float ResourceCoefficient
-int SpellEffectID
+int<SpellEffect::ID> SpellEffectID
 float Field_5_4_0_17266_004?
 
 BUILD 5.4.0.17266-5.4.8.18414

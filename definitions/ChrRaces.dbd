@@ -13,8 +13,8 @@ int<SoundEntries::ID> SplashSoundID
 string ClientFileString
 int<CinematicSequences::ID> CinematicSequenceID
 int Alliance
-locstring Name_lang
-locstring Name_female_lang
+locstring Name_lang // quest text $R
+locstring Name_female_lang // quest text $R
 locstring Name_male_lang
 string FacialHairCustomization
 string HairCustomization

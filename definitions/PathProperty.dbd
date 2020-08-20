@@ -1,7 +1,7 @@
 COLUMNS
 int ID
 int<Path::ID> PathID
-int Value
+int Value // depending on PropertyIndex, 2: PlayerConditionID, 5: something Z distance to areatrigger box * 1000
 int PropertyIndex
 
 BUILD 5.0.1.15464-5.4.8.18414

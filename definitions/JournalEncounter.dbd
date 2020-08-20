@@ -1,7 +1,7 @@
 COLUMNS
 int ID
 int<DungeonMap::ID> DungeonMapID
-int WorldMapAreaID
+int<WorldMapArea::ID> WorldMapAreaID
 float Map
 int FirstSectionID
 int<JournalInstance::ID> JournalInstanceID
@@ -25,8 +25,8 @@ Name_lang
 Description_lang
 Flags<32>
 
-BUILD 4.2.0.14333-4.3.4.15595
 BUILD 5.0.1.15464-5.0.1.15544
+BUILD 4.2.0.14333-4.3.4.15595
 $id$ID<32>
 DungeonMapID<32>
 WorldMapAreaID<32>

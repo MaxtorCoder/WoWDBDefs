@@ -1,8 +1,8 @@
 COLUMNS
 int ID
-int CreatureID
+int<Creature::ID> CreatureID
 locstring Description_lang
-int Flags
+int Flags // &0x8: use WorldEffectID 1012 instead of 1337
 int PetTypeEnum
 locstring SourceText_lang
 int SourceTypeEnum

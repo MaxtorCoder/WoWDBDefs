@@ -2,7 +2,7 @@ COLUMNS
 string SceneScriptFunction
 int ID
 int CastMilliSeconds
-int Flags // always 0 in all dbs, only known BfA field not used
+int Flags
 int ImpactMilliSeconds
 int RangeTypeEnum
 int<SceneScriptPackage::ID> SceneScriptPackageID

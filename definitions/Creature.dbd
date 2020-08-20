@@ -2,8 +2,8 @@ COLUMNS
 int ID
 int AlwaysItem
 int Classification
-int CreatureFamily
-int DisplayID
+int<CreatureFamily::ID> CreatureFamily
+int<CreatureDisplayInfo::ID> DisplayID
 float DisplayProbability
 locstring Name_lang
 int StartAnimState

@@ -1,6 +1,6 @@
 COLUMNS
 int ID
-int ChildSceneScriptPackageID
+int<SceneScriptPackage::ID> ChildSceneScriptPackageID
 int OrderIndex
 int<SceneScript::ID> SceneScriptID
 int<SceneScriptPackage::ID> SceneScriptPackageID

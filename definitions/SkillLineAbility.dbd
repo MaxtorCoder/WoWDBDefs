@@ -1,7 +1,7 @@
 COLUMNS
 int ID
-int SkillLine
-int Spell
+int<SkillLine::ID> SkillLine
+int<Spell::ID> Spell
 int RaceMask
 int ClassMask
 int MinSkillLineRank
@@ -14,7 +14,7 @@ int UniqueBit
 int<TradeSkillCategory::ID> TradeSkillCategoryID
 int ExcludeRace
 int ExcludeClass
-int SupercededBySpell
+int<Spell::ID> SupercededBySpell
 int CharacterPoints
 int Abandonable
 int Field_0_5_5_3494_012? // only set on [Plate Mail] in 0.5.5

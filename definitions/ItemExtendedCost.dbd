@@ -2,17 +2,17 @@ COLUMNS
 int ID
 int ArenaBracket
 int CurrencyCount
-int CurrencyID
+int<CurrencyTypes::ID> CurrencyID
 int Flags
 int ItemCount
-int ItemID
-int MinFactionID
+int<Item::ID> ItemID
+int<Faction::ID> MinFactionID
 int MinReputation
-int RequiredAchievement
+int<Achievement::ID> RequiredAchievement
 int RequiredArenaRating
 int HonorPoints
 int ArenaPoints
-int ItemPurchaseGroup
+int<ItemPurchaseGroup::ID> ItemPurchaseGroup
 int Field_4_0_0_11927_012?
 
 BUILD 5.0.1.15464-5.4.8.18414

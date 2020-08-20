@@ -1,7 +1,7 @@
 COLUMNS
 int ID
 int<Map::ID> MapID
-int QuestPOIBlobID
+int<QuestPOIBlob::ID> QuestPOIBlobID
 locstring Name_lang
 int AreaPOIIconEnum
 

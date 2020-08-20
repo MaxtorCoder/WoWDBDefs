@@ -1,7 +1,7 @@
 COLUMNS
 int ID
-int FileDataID
-int AttachPoint
+int<FileData::ID> FileDataID // display in 3d world
+int AttachPoint // see M2 attachment points
 int Minimapobject
 int Priority
 int Flags

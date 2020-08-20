@@ -2,7 +2,7 @@ COLUMNS
 int ID
 float Position
 float Direction
-int<SoundEntries::ID> SoundEntriesID
+int<SoundKit::ID> SoundEntriesID
 int<Map::ID> MapID
 string Name
 int EmitterType

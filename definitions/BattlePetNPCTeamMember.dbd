@@ -1,6 +1,6 @@
 COLUMNS
 int ID
-string Name_lang
+locstring Name_lang
 
 BUILD 5.0.2.15827-5.4.8.18414
 $id$ID<32>

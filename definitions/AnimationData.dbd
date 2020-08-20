@@ -1,18 +1,18 @@
 COLUMNS
 int ID
 string Name
-int Flags
-int<AnimationData::ID> Fallback
-int BehaviorID
-int BehaviorTier
+int Flags // &0x10: fallback-related,  &0x20: fallback-related, &0x80: fallback-related
+int<AnimationData::ID> Fallback // visual equivalent
+int<AnimationData::ID> BehaviorID // semantic equivalent
+int BehaviorTier // 0: Normal, 3: Flying
 int Weaponflags
 int Bodyflags
 int Field_0_7_0_3694_004?
 
 BUILD 6.0.1.18179
 BUILD 4.1.0.13914, 4.1.0.14007
-BUILD 4.2.0.14333-4.3.4.15595
 BUILD 5.0.1.15464-5.4.8.18414
+BUILD 4.2.0.14333-4.3.4.15595
 $id$ID<32>
 Name
 Flags<32>
@@ -21,9 +21,9 @@ BehaviorID<32>
 BehaviorTier<32>
 
 BUILD 4.0.0.11792
-BUILD 3.0.1.8471-3.3.5.12340
-BUILD 4.0.0.11792-4.1.0.13875
 BUILD 4.2.0.14040-4.2.0.14316
+BUILD 4.0.0.11792-4.1.0.13875
+BUILD 3.0.1.8471-3.3.5.12340
 $id$ID<32>
 Name
 Weaponflags<32>
@@ -33,10 +33,10 @@ Fallback<32>
 BehaviorID<32>
 BehaviorTier<32>
 
-BUILD 0.11.0.3925-0.12.0.3988
-BUILD 1.0.0.3980-1.12.3.6141
-BUILD 2.0.0.5610-2.4.3.8606
 BUILD 3.0.1.8303-3.0.1.8391
+BUILD 2.0.0.5610-2.4.3.8606
+BUILD 1.0.0.3980-1.12.3.6141
+BUILD 0.11.0.3925-0.12.0.3988
 $id$ID<32>
 Name
 Weaponflags<32>

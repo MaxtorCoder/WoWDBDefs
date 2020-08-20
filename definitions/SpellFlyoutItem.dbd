@@ -1,6 +1,6 @@
 COLUMNS
 int ID
-int SpellFlyoutID
+int<SpellFlyout::ID> SpellFlyoutID
 int<Spell::ID> SpellID
 int Slot
 

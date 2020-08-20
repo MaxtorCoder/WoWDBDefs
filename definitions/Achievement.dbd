@@ -1,6 +1,6 @@
 COLUMNS
 int ID
-int Faction
+int<Faction::ID> Faction
 int<Map::ID> Instance_ID
 int<Achievement::ID> Supercedes
 locstring Title_lang
@@ -13,7 +13,7 @@ int<SpellIcon::ID> IconID
 locstring Reward_lang
 int Minimum_criteria
 int<Achievement::ID> Shares_criteria
-int Criteria_tree
+int<CriteriaTree::ID> Criteria_tree
 int Field_3_0_1_8471_007? // possibly ui_order
 int Field_3_0_1_8303_002?
 

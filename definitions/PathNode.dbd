@@ -1,6 +1,6 @@
 COLUMNS
 int ID
-int LocationID
+int<Location::ID> LocationID
 int<Path::ID> PathID
 int Sequence
 

@@ -4,14 +4,14 @@ int<Languages::ID> LanguageID
 int<Emotes::ID> EmoteID
 int<SoundEntries::ID> SoundEntriesID
 int EmoteDelay
-int EmotesID // Also known as EndEmoteID
+int<Emotes::ID> EmotesID
 int Flags
-locstring Text_lang // Male?
-locstring Text1_lang // Female?
+locstring Text_lang
+locstring Text1_lang
 
 BUILD 6.0.1.18179
-BUILD 5.0.1.15650-5.4.8.18414
 BUILD 6.0.1.18125-6.2.4.21742
+BUILD 5.0.1.15650-5.4.8.18414
 $id$ID<32>
 LanguageID<32>
 Text_lang

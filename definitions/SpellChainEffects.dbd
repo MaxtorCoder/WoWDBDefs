@@ -46,7 +46,7 @@ int Padding_5_3_0_16965_043?
 int RenderLayer
 float TextureLength
 float WavePhase
-int SpellChainEffectID
+int<SpellChainEffects::ID> SpellChainEffectID
 string Texture
 int Padding_4_0_0_11792_044?
 string Combo
